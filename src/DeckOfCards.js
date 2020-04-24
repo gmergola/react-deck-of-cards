@@ -39,6 +39,7 @@ function DeckOfCards(){
         */
         if(cardData.data.success){
           addCard(cardData.data.cards[0])
+          setDrawCard(false);
         }else{
           alert("Error: no cards remaining!");
         }
@@ -46,14 +47,18 @@ function DeckOfCards(){
         console.log('request failed');
       }
     }
-    fetchCard();
-  }, [drawCard]);
+
+    if(drawCard && deckId){
+      fetchCard();
+    }
+  }, [drawCard, deckId]);
   
   /** drawACard: change drawCard state to true if it is false
    * change it to false if it is true
    */
+
   function drawACard(){
-    setDrawCard(draw => !draw);
+    setDrawCard(true);
   }
 
   /**addCard: Adds a card to state */
